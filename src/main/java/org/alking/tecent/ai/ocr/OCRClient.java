@@ -22,4 +22,6 @@ public interface OCRClient {
 
     OCRBankCardReply bankCard(Resource resource) throws IOException;
 
+    OCRHandWriteReply handWrite(Resource resource) throws IOException;
+
 }

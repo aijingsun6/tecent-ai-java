@@ -27,6 +27,8 @@ public class BaseClient {
 
     public static final String SIGN_FIELD_IMAGE = "image";
 
+    public static final String SIGN_FIELD_IMAGE_URL = "image_url";
+
     private final String appId;
 
     private final String appKey;
@@ -80,16 +82,20 @@ public class BaseClient {
         map.put(SIGN_FIELD_TIME_STAMP,timestamp);
         map.put(SIGN_FIELD_NONCE_STR,timestamp);
         for (Map.Entry<String, String> entry : map.entrySet()) {
-            if (SIGN_FIELD_APP_KEY.equals(entry.getKey())) {
+            final String key = entry.getKey();
+            final String value = entry.getValue();
+            if (SIGN_FIELD_APP_KEY.equals(key)) {
                 continue;
             }
-            if (SIGN_FIELD_IMAGE.equals(entry.getKey())) {
-                String base64 = entry.getValue();
-                String urlEncode = URLEncoder.encode(base64, "utf-8");
-                sb.append(String.format("%s=%s&", entry.getKey(), urlEncode));
+            if(SIGN_FIELD_SIGN.equals(key)){
                 continue;
             }
-            sb.append(String.format("%s=%s&", entry.getKey(), entry.getValue()));
+            if (SIGN_FIELD_IMAGE.equals(key) || SIGN_FIELD_IMAGE_URL.equals(key)) {
+                String urlEncode = URLEncoder.encode(value, "utf-8");
+                sb.append(String.format("%s=%s&", key, urlEncode));
+                continue;
+            }
+            sb.append(String.format("%s=%s&", key, value));
         }
         sb.append(String.format("%s=%s", SIGN_FIELD_APP_KEY, this.appKey));
 
