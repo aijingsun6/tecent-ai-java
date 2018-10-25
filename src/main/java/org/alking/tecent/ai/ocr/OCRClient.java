@@ -25,4 +25,7 @@ public interface OCRClient {
     OCRItemListReply handWrite(final Resource resource) throws IOException;
 
     OCRItemListReply carPlate(final Resource resource) throws IOException;
+
+    OCRItemListReply businessCard(final Resource resource) throws IOException;
+
 }

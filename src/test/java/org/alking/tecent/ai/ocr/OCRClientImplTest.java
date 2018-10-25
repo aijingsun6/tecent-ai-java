@@ -79,4 +79,12 @@ public class OCRClientImplTest extends BaseTest {
         OCRItemListReply reply = client.carPlate(resource);
         Assert.assertEquals(new Integer(0),reply.getRet());
     }
+
+    @Test
+    public void testBCHttp() throws IOException {
+        String url = "https://raw.githubusercontent.com/aijingsun6/tecent-ai-java/master/doc/ocr_bc.jpg";
+        Resource resource = new Resource(Resource.RES_TYPE_HTTP,url);
+        OCRItemListReply reply = client.businessCard(resource);
+        Assert.assertEquals(new Integer(0),reply.getRet());
+    }
 }

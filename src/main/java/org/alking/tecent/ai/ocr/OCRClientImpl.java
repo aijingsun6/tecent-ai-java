@@ -24,6 +24,8 @@ public class OCRClientImpl  extends BaseClient implements OCRClient {
 
     private static final String OCR_CAR_PLATE_URL = "https://api.ai.qq.com/fcgi-bin/ocr/ocr_plateocr";
 
+    private static final String OCR_BC_URL = "https://api.ai.qq.com/fcgi-bin/ocr/ocr_bcocr";
+
     private static final String SIGN_FIELD_CARD_TYPE = "card_type";
 
     private static final String SIGN_FIELD_TYPE = "type";
@@ -118,5 +120,13 @@ public class OCRClientImpl  extends BaseClient implements OCRClient {
             map.put(SIGN_FIELD_IMAGE,base64);
         }
         return normalReq(OCR_CAR_PLATE_URL,map,OCRItemListReply.class);
+    }
+
+    @Override
+    public OCRItemListReply businessCard(Resource resource) throws IOException {
+        String base64 = this.parseSourceData(resource);
+        final TreeMap<String,String> map = new TreeMap<>();
+        map.put(SIGN_FIELD_IMAGE,base64);
+        return normalReq(OCR_BC_URL,map,OCRItemListReply.class);
     }
 }
