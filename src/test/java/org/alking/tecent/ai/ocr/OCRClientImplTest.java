@@ -47,7 +47,14 @@ public class OCRClientImplTest extends BaseTest {
         String url = "https://raw.githubusercontent.com/aijingsun6/tecent-ai-java/master/doc/ocr_vehicle.jpg";
         Resource resource = new Resource(Resource.RES_TYPE_HTTP,url);
         OCRVehicleLicenseReply reply = client.vehicleLicense(resource);
-        OCRItemList list = reply.getData();
+        Assert.assertEquals(new Integer(0),reply.getRet());
+    }
 
+    @Test
+    public void testDriveHttp() throws IOException {
+        String url = "https://raw.githubusercontent.com/aijingsun6/tecent-ai-java/master/doc/ocr_drive.jpg";
+        Resource resource = new Resource(Resource.RES_TYPE_HTTP,url);
+        OCRDriveLicenseReply reply = client.driveLicense(resource);
+        Assert.assertEquals(new Integer(0),reply.getRet());
     }
 }

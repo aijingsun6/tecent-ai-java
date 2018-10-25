@@ -66,6 +66,12 @@ public class OCRClientImpl  extends BaseClient implements OCRClient {
 
     @Override
     public OCRDriveLicenseReply driveLicense(Resource resource) throws IOException {
-        return null;
+        String base64 = this.parseSourceData(resource);
+        final TreeMap<String,String> map = new TreeMap<>();
+        map.put(SIGN_FIELD_IMAGE,base64);
+        map.put(SIGN_FIELD_TYPE,String.valueOf(TYPE_DRIVE_LICENSE));
+        this.calcSign(map);
+        String json = HttpUtil.doPostFormString(OCR_DRIVE_LICENSE_URL,map);
+        return JsonUtil.fromJson(json,OCRDriveLicenseReply.class);
     }
 }
