@@ -76,7 +76,7 @@ public class GeneOCRReply extends BaseReply<GeneOCRReply.Data> {
         private String itemString;
 
         @SerializedName("itemcoord")
-        private ItemCoord itemCoord;
+        private List<ItemCoord> itemCoord;
 
         public String getItemString() {
             return itemString;
@@ -86,11 +86,11 @@ public class GeneOCRReply extends BaseReply<GeneOCRReply.Data> {
             this.itemString = itemString;
         }
 
-        public ItemCoord getItemCoord() {
+        public List<ItemCoord> getItemCoord() {
             return itemCoord;
         }
 
-        public void setItemCoord(ItemCoord itemCoord) {
+        public void setItemCoord(List<ItemCoord> itemCoord) {
             this.itemCoord = itemCoord;
         }
 
