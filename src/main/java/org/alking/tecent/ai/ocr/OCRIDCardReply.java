@@ -3,7 +3,7 @@ package org.alking.tecent.ai.ocr;
 import com.google.gson.annotations.SerializedName;
 import org.alking.tecent.ai.domain.BaseReply;
 
-public class IDCardOCRReply extends BaseReply<IDCardOCRReply.Data> {
+public class OCRIDCardReply extends BaseReply<OCRIDCardReply.Data> {
 
     public static class Data {
 
@@ -114,7 +114,7 @@ public class IDCardOCRReply extends BaseReply<IDCardOCRReply.Data> {
         }
     }
 
-    public IDCardOCRReply() {
+    public OCRIDCardReply() {
         super();
     }
 }
