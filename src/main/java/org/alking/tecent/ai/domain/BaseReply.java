@@ -1,11 +1,10 @@
 package org.alking.tecent.ai.domain;
 
 import com.google.gson.annotations.SerializedName;
-import com.sun.org.apache.xpath.internal.operations.String;
 
 /**
- * 一般返回数据结构
- * @param <T>
+ *
+ *
  */
 public class BaseReply<T> {
 
