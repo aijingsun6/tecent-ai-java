@@ -6,5 +6,8 @@ import java.io.IOException;
 
 public interface OCRClient {
 
-    GeneOCRReply geneocr(Resource resource) throws IOException;
+    GeneOCRReply general(Resource resource) throws IOException;
+
+    IDCardOCRReply idCard(Resource resource) throws IOException;
+
 }

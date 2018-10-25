@@ -13,7 +13,7 @@ import java.util.Base64;
 import java.util.Map;
 import java.util.TreeMap;
 
-public abstract class BaseClient {
+public class BaseClient {
 
     public static final String SIGN_FIELD_APP_ID = "app_id";
 
@@ -43,8 +43,6 @@ public abstract class BaseClient {
         this.appId = appId;
         this.appKey = appKey;
     }
-
-    protected abstract String reqURL();
 
     protected String parseSourceData(final Resource resource) throws IOException {
 
