@@ -89,12 +89,8 @@ public class BaseClient {
             if(SIGN_FIELD_SIGN.equals(key)){
                 continue;
             }
-            if (SIGN_FIELD_IMAGE.equals(key) || SIGN_FIELD_IMAGE_URL.equals(key)) {
-                String urlEncode = URLEncoder.encode(value, "utf-8");
-                sb.append(String.format("%s=%s&", key, urlEncode));
-                continue;
-            }
-            sb.append(String.format("%s=%s&", key, value));
+            String urlEncode = URLEncoder.encode(value, "UTF-8");
+            sb.append(String.format("%s=%s&", key, urlEncode));
         }
         sb.append(String.format("%s=%s", SIGN_FIELD_APP_KEY, this.appKey));
 

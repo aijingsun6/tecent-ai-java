@@ -113,12 +113,16 @@ public class OCRClientImpl  extends BaseClient implements OCRClient {
     @Override
     public OCRItemListReply carPlate(Resource resource) throws IOException {
         final TreeMap<String,String> map = new TreeMap<>();
-        if(Resource.RES_TYPE_HTTP == resource.getType()){
-            map.put(SIGN_FIELD_IMAGE_URL,resource.getUri());
-        }else {
-            String base64 = this.parseSourceData(resource);
-            map.put(SIGN_FIELD_IMAGE,base64);
-        }
+
+        String base64 = this.parseSourceData(resource);
+        map.put(SIGN_FIELD_IMAGE,base64);
+//        TODO:why use image_url param return error code 16399
+//        if(Resource.RES_TYPE_HTTP == resource.getType()){
+//            map.put(SIGN_FIELD_IMAGE_URL,resource.getUri());
+//        }else {
+//            String base64 = this.parseSourceData(resource);
+//            map.put(SIGN_FIELD_IMAGE,base64);
+//        }
         return normalReq(OCR_CAR_PLATE_URL,map,OCRItemListReply.class);
     }
 
