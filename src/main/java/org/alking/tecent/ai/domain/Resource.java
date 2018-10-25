@@ -2,28 +2,17 @@ package org.alking.tecent.ai.domain;
 
 public class Resource {
 
-    public enum ResourceType {
-        /**
-         * 本地资源
-         */
-        LOCAL,
+    public static final int RES_TYPE_LOCAL = 1;
 
-        /**
-         *  HTTP资源
-         */
-        HTTP,
+    public static final int RES_TYPE_HTTP = 2;
 
-        /**
-         * base64资源
-         */
-        BASE64,
-    }
+    public static final int RES_TYPE_BASE64 = 3;
 
-    private final ResourceType type;
+    private final int type;
 
     private final String uri;
 
-    public ResourceType getType() {
+    public int getType() {
         return type;
     }
 
@@ -31,14 +20,14 @@ public class Resource {
         return uri;
     }
 
-    public Resource(ResourceType type, String uri) {
+    public Resource(int type, String uri) {
         this.type = type;
         this.uri = uri;
     }
 
     @Override
     public String toString() {
-        return String.format("(%s,%s)",type,uri);
+        return String.format("(%d,%s)",type,uri);
     }
 
 }

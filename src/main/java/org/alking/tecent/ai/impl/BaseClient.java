@@ -52,17 +52,17 @@ public abstract class BaseClient {
             throw new IOException("resource is null");
         }
 
-        if(Resource.ResourceType.BASE64.equals( resource.getType())){
+        if(Resource.RES_TYPE_BASE64 == resource.getType()){
             return resource.getUri();
         }
 
-        if(Resource.ResourceType.LOCAL.equals( resource.getType())){
+        if(Resource.RES_TYPE_LOCAL == resource.getType()){
             String path = resource.getUri();
             byte[] bytes = FileUtils.readFileToByteArray(new File(path));
             return Base64.getEncoder().encodeToString(bytes);
         }
 
-        if(Resource.ResourceType.HTTP.equals( resource.getType())){
+        if(Resource.RES_TYPE_HTTP == resource.getType()){
             String uri = resource.getUri();
             byte[] bytes = HttpUtil.doGetBytes(uri);
             return Base64.getEncoder().encodeToString(bytes);
