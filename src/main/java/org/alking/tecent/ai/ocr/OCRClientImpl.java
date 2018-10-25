@@ -18,6 +18,8 @@ public class OCRClientImpl  extends BaseClient implements OCRClient {
 
     private static final String OCR_BIZ_URL = "https://api.ai.qq.com/fcgi-bin/ocr/ocr_bizlicenseocr";
 
+    private static final String OCR_BANK_CARD_URL = "https://api.ai.qq.com/fcgi-bin/ocr/ocr_creditcardocr";
+
     private static final String SIGN_FIELD_CARD_TYPE = "card_type";
 
     private static final String SIGN_FIELD_TYPE = "type";
@@ -85,5 +87,15 @@ public class OCRClientImpl  extends BaseClient implements OCRClient {
         this.calcSign(map);
         String json = HttpUtil.doPostFormString(OCR_BIZ_URL,map);
         return JsonUtil.fromJson(json,OCRBizReply.class);
+    }
+
+    @Override
+    public OCRBankCardReply bankCard(Resource resource) throws IOException {
+        String base64 = this.parseSourceData(resource);
+        final TreeMap<String,String> map = new TreeMap<>();
+        map.put(SIGN_FIELD_IMAGE,base64);
+        this.calcSign(map);
+        String json = HttpUtil.doPostFormString(OCR_BANK_CARD_URL,map);
+        return JsonUtil.fromJson(json,OCRBankCardReply.class);
     }
 }

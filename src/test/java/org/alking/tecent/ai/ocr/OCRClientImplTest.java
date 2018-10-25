@@ -55,4 +55,12 @@ public class OCRClientImplTest extends BaseTest {
         OCRBizReply reply = client.biz(resource);
         Assert.assertEquals(new Integer(0),reply.getRet());
     }
+
+    @Test
+    public void testBankCardHttp() throws  IOException {
+        String url = "https://raw.githubusercontent.com/aijingsun6/tecent-ai-java/master/doc/ocr_bank_card.jpg";
+        Resource resource = new Resource(Resource.RES_TYPE_HTTP,url);
+        OCRBankCardReply reply = client.bankCard(resource);
+        Assert.assertEquals(new Integer(0),reply.getRet());
+    }
 }

@@ -20,4 +20,6 @@ public interface OCRClient {
 
     OCRBizReply biz(Resource resource) throws IOException;
 
+    OCRBankCardReply bankCard(Resource resource) throws IOException;
+
 }
