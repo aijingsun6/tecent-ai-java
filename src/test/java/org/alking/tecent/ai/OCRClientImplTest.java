@@ -1,7 +1,10 @@
-package org.alking.tecent.ai.ocr;
+package org.alking.tecent.ai;
 
-import org.alking.tecent.ai.BaseTest;
 import org.alking.tecent.ai.domain.Resource;
+import org.alking.tecent.ai.ocr.OCRClient;
+import org.alking.tecent.ai.ocr.OCRClientImpl;
+import org.alking.tecent.ai.ocr.OCRIDCardReply;
+import org.alking.tecent.ai.ocr.OCRItemListReply;
 import org.junit.Assert;
 import org.junit.Test;
 
