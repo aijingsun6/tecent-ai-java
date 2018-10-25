@@ -77,7 +77,6 @@ public class BaseClient {
     protected String calcSign(TreeMap<String, String> map) throws UnsupportedEncodingException {
         StringBuilder sb = new StringBuilder();
         map.put(SIGN_FIELD_APP_ID,this.appId);
-        map.put(SIGN_FIELD_APP_KEY, this.appKey);
         String timestamp = String.valueOf(System.currentTimeMillis()/1000);
         map.put(SIGN_FIELD_TIME_STAMP,timestamp);
         map.put(SIGN_FIELD_NONCE_STR,timestamp);

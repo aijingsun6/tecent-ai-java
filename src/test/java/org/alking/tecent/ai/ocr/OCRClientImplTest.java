@@ -76,7 +76,7 @@ public class OCRClientImplTest extends BaseTest {
     public void testCarPlateHttp() throws IOException {
         String url = "https://raw.githubusercontent.com/aijingsun6/tecent-ai-java/master/doc/ocr_car_plate.jpg";
         Resource resource = new Resource(Resource.RES_TYPE_HTTP,url);
-        OCRItemListReply reply = client.handWrite(resource);
+        OCRItemListReply reply = client.carPlate(resource);
         Assert.assertEquals(new Integer(0),reply.getRet());
     }
 }
