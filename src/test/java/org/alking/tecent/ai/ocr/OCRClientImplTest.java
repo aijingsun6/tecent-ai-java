@@ -18,7 +18,7 @@ public class OCRClientImplTest extends BaseTest {
     public void testGeneralHttp() throws IOException {
         String url = "https://raw.githubusercontent.com/aijingsun6/tecent-ai-java/master/doc/gene_ocr_APPLE.png";
         Resource resource = new Resource(Resource.RES_TYPE_HTTP,url);
-        OCRGeneralReply reply = client.general(resource);
+        OCRItemListReply reply = client.general(resource);
         Assert.assertEquals(new Integer(0),reply.getRet());
         Assert.assertEquals(1,reply.getData().getItems().size());
         Assert.assertEquals("APPLE",reply.getData().getItems().get(0).getItemString());
@@ -36,7 +36,7 @@ public class OCRClientImplTest extends BaseTest {
     public void testVehicleHttp() throws IOException {
         String url = "https://raw.githubusercontent.com/aijingsun6/tecent-ai-java/master/doc/ocr_vehicle.jpg";
         Resource resource = new Resource(Resource.RES_TYPE_HTTP,url);
-        OCRVehicleLicenseReply reply = client.vehicleLicense(resource);
+        OCRItemListReply reply = client.vehicleLicense(resource);
         Assert.assertEquals(new Integer(0),reply.getRet());
     }
 
@@ -44,7 +44,7 @@ public class OCRClientImplTest extends BaseTest {
     public void testDriveHttp() throws IOException {
         String url = "https://raw.githubusercontent.com/aijingsun6/tecent-ai-java/master/doc/ocr_drive.jpg";
         Resource resource = new Resource(Resource.RES_TYPE_HTTP,url);
-        OCRDriveLicenseReply reply = client.driveLicense(resource);
+        OCRItemListReply reply = client.driveLicense(resource);
         Assert.assertEquals(new Integer(0),reply.getRet());
     }
 
@@ -52,7 +52,7 @@ public class OCRClientImplTest extends BaseTest {
     public void testBizHttp() throws IOException {
         String url = "https://raw.githubusercontent.com/aijingsun6/tecent-ai-java/master/doc/ocr_biz.jpg";
         Resource resource = new Resource(Resource.RES_TYPE_HTTP,url);
-        OCRBizReply reply = client.biz(resource);
+        OCRItemListReply reply = client.biz(resource);
         Assert.assertEquals(new Integer(0),reply.getRet());
     }
 
@@ -60,7 +60,7 @@ public class OCRClientImplTest extends BaseTest {
     public void testBankCardHttp() throws  IOException {
         String url = "https://raw.githubusercontent.com/aijingsun6/tecent-ai-java/master/doc/ocr_bank_card.jpg";
         Resource resource = new Resource(Resource.RES_TYPE_HTTP,url);
-        OCRBankCardReply reply = client.bankCard(resource);
+        OCRItemListReply reply = client.bankCard(resource);
         Assert.assertEquals(new Integer(0),reply.getRet());
     }
 
@@ -68,7 +68,15 @@ public class OCRClientImplTest extends BaseTest {
     public void testHandWriteHttp() throws IOException {
         String url = "https://raw.githubusercontent.com/aijingsun6/tecent-ai-java/master/doc/ocr_hand_write.jpg";
         Resource resource = new Resource(Resource.RES_TYPE_HTTP,url);
-        OCRHandWriteReply reply = client.handWrite(resource);
+        OCRItemListReply reply = client.handWrite(resource);
+        Assert.assertEquals(new Integer(0),reply.getRet());
+    }
+
+    @Test
+    public void testCarPlateHttp() throws IOException {
+        String url = "https://raw.githubusercontent.com/aijingsun6/tecent-ai-java/master/doc/ocr_car_plate.jpg";
+        Resource resource = new Resource(Resource.RES_TYPE_HTTP,url);
+        OCRItemListReply reply = client.handWrite(resource);
         Assert.assertEquals(new Integer(0),reply.getRet());
     }
 }

@@ -10,18 +10,19 @@ public interface OCRClient {
 
     int ID_CARD_TYPE_BACK = 1;
 
-    OCRGeneralReply general(Resource resource) throws IOException;
+    OCRItemListReply general(final Resource resource) throws IOException;
 
-    OCRIDCardReply idCard(Resource resource, int type) throws IOException;
+    OCRIDCardReply idCard(final Resource resource, int type) throws IOException;
 
-    OCRVehicleLicenseReply vehicleLicense(Resource resource) throws IOException;
+    OCRItemListReply vehicleLicense(final Resource resource) throws IOException;
 
-    OCRDriveLicenseReply driveLicense(Resource resource)throws IOException;
+    OCRItemListReply driveLicense(final Resource resource)throws IOException;
 
-    OCRBizReply biz(Resource resource) throws IOException;
+    OCRItemListReply biz(final Resource resource) throws IOException;
 
-    OCRBankCardReply bankCard(Resource resource) throws IOException;
+    OCRItemListReply bankCard(final Resource resource) throws IOException;
 
-    OCRHandWriteReply handWrite(Resource resource) throws IOException;
+    OCRItemListReply handWrite(final Resource resource) throws IOException;
 
+    OCRItemListReply carPlate(final Resource resource) throws IOException;
 }

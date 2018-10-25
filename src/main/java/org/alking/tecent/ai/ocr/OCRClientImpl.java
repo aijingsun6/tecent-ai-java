@@ -22,6 +22,8 @@ public class OCRClientImpl  extends BaseClient implements OCRClient {
 
     private static final String OCR_HAND_WRITE_URL = "https://api.ai.qq.com/fcgi-bin/ocr/ocr_handwritingocr";
 
+    private static final String OCR_CAR_PLATE_URL = "https://api.ai.qq.com/fcgi-bin/ocr/ocr_plateocr";
+
     private static final String SIGN_FIELD_CARD_TYPE = "card_type";
 
     private static final String SIGN_FIELD_TYPE = "type";
@@ -30,19 +32,22 @@ public class OCRClientImpl  extends BaseClient implements OCRClient {
 
     private static final int TYPE_DRIVE_LICENSE = 1;
 
-
     public OCRClientImpl(String appId, String appKey) {
         super(appId, appKey);
     }
 
+    private <T> T normalReq(final String url, final TreeMap<String,String> map, Class<T> clazz) throws IOException {
+        this.calcSign(map);
+        final String json = HttpUtil.doPostFormString(url,map);
+        return JsonUtil.fromJson(json,clazz);
+    }
+
     @Override
-    public OCRGeneralReply general(Resource resource) throws IOException {
-        String base64 = this.parseSourceData(resource);
+    public OCRItemListReply general(final Resource resource) throws IOException {
+        final String base64 = this.parseSourceData(resource);
         final TreeMap<String,String> map = new TreeMap<>();
         map.put(SIGN_FIELD_IMAGE,base64);
-        this.calcSign(map);
-        String json = HttpUtil.doPostFormString(OCR_GENERIC_URL,map);
-        return JsonUtil.fromJson(json,OCRGeneralReply.class);
+        return normalReq(OCR_GENERIC_URL,map,OCRItemListReply.class);
     }
 
     @Override
@@ -54,55 +59,45 @@ public class OCRClientImpl  extends BaseClient implements OCRClient {
         final TreeMap<String,String> map = new TreeMap<>();
         map.put(SIGN_FIELD_IMAGE,base64);
         map.put(SIGN_FIELD_CARD_TYPE,String.valueOf(type));
-        this.calcSign(map);
-        String json = HttpUtil.doPostFormString(OCR_ID_CARD_URL,map);
-        return JsonUtil.fromJson(json,OCRIDCardReply.class);
+        return normalReq(OCR_ID_CARD_URL,map,OCRIDCardReply.class);
     }
 
     @Override
-    public OCRVehicleLicenseReply vehicleLicense(Resource resource) throws IOException {
+    public OCRItemListReply vehicleLicense(Resource resource) throws IOException {
         String base64 = this.parseSourceData(resource);
         final TreeMap<String,String> map = new TreeMap<>();
         map.put(SIGN_FIELD_IMAGE,base64);
         map.put(SIGN_FIELD_TYPE,String.valueOf(TYPE_VEHICLE_LICENSE));
-        this.calcSign(map);
-        String json = HttpUtil.doPostFormString(OCR_DRIVE_LICENSE_URL,map);
-        return JsonUtil.fromJson(json,OCRVehicleLicenseReply.class);
+        return normalReq(OCR_DRIVE_LICENSE_URL,map,OCRItemListReply.class);
     }
 
     @Override
-    public OCRDriveLicenseReply driveLicense(Resource resource) throws IOException {
+    public OCRItemListReply driveLicense(Resource resource) throws IOException {
         String base64 = this.parseSourceData(resource);
         final TreeMap<String,String> map = new TreeMap<>();
         map.put(SIGN_FIELD_IMAGE,base64);
         map.put(SIGN_FIELD_TYPE,String.valueOf(TYPE_DRIVE_LICENSE));
-        this.calcSign(map);
-        String json = HttpUtil.doPostFormString(OCR_DRIVE_LICENSE_URL,map);
-        return JsonUtil.fromJson(json,OCRDriveLicenseReply.class);
+        return normalReq(OCR_DRIVE_LICENSE_URL,map,OCRItemListReply.class);
     }
 
     @Override
-    public OCRBizReply biz(Resource resource) throws IOException {
+    public OCRItemListReply biz(Resource resource) throws IOException {
         String base64 = this.parseSourceData(resource);
         final TreeMap<String,String> map = new TreeMap<>();
         map.put(SIGN_FIELD_IMAGE,base64);
-        this.calcSign(map);
-        String json = HttpUtil.doPostFormString(OCR_BIZ_URL,map);
-        return JsonUtil.fromJson(json,OCRBizReply.class);
+        return normalReq(OCR_BIZ_URL,map,OCRItemListReply.class);
     }
 
     @Override
-    public OCRBankCardReply bankCard(Resource resource) throws IOException {
+    public OCRItemListReply bankCard(Resource resource) throws IOException {
         String base64 = this.parseSourceData(resource);
         final TreeMap<String,String> map = new TreeMap<>();
         map.put(SIGN_FIELD_IMAGE,base64);
-        this.calcSign(map);
-        String json = HttpUtil.doPostFormString(OCR_BANK_CARD_URL,map);
-        return JsonUtil.fromJson(json,OCRBankCardReply.class);
+        return normalReq(OCR_BANK_CARD_URL,map,OCRItemListReply.class);
     }
 
     @Override
-    public OCRHandWriteReply handWrite(Resource resource) throws IOException {
+    public OCRItemListReply handWrite(Resource resource) throws IOException {
         final TreeMap<String,String> map = new TreeMap<>();
         if(Resource.RES_TYPE_HTTP == resource.getType()){
             map.put(SIGN_FIELD_IMAGE_URL,resource.getUri());
@@ -110,8 +105,18 @@ public class OCRClientImpl  extends BaseClient implements OCRClient {
             String base64 = this.parseSourceData(resource);
             map.put(SIGN_FIELD_IMAGE,base64);
         }
-        this.calcSign(map);
-        String json = HttpUtil.doPostFormString(OCR_HAND_WRITE_URL,map);
-        return JsonUtil.fromJson(json,OCRHandWriteReply.class);
+        return normalReq(OCR_HAND_WRITE_URL,map,OCRItemListReply.class);
+    }
+
+    @Override
+    public OCRItemListReply carPlate(Resource resource) throws IOException {
+        final TreeMap<String,String> map = new TreeMap<>();
+        if(Resource.RES_TYPE_HTTP == resource.getType()){
+            map.put(SIGN_FIELD_IMAGE_URL,resource.getUri());
+        }else {
+            String base64 = this.parseSourceData(resource);
+            map.put(SIGN_FIELD_IMAGE,base64);
+        }
+        return normalReq(OCR_CAR_PLATE_URL,map,OCRItemListReply.class);
     }
 }
