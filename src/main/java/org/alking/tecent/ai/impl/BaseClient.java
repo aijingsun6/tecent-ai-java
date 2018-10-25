@@ -56,7 +56,7 @@ public abstract class BaseClient {
             return resource.getUri();
         }
 
-        if(Resource.ResourceType.LOCALE.equals( resource.getType())){
+        if(Resource.ResourceType.LOCAL.equals( resource.getType())){
             String path = resource.getUri();
             byte[] bytes = FileUtils.readFileToByteArray(new File(path));
             return Base64.getEncoder().encodeToString(bytes);

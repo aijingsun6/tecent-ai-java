@@ -2,11 +2,11 @@ package org.alking.tecent.ai.domain;
 
 public class Resource {
 
-    public static enum ResourceType {
+    public enum ResourceType {
         /**
          * 本地资源
          */
-        LOCALE,
+        LOCAL,
 
         /**
          *  HTTP资源
