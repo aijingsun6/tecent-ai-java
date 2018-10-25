@@ -10,6 +10,9 @@ public class OCRItem {
     @SerializedName("itemstring")
     private String itemString;
 
+    @SerializedName("itemconf")
+    private String itemConfidence;
+
     public String getItem() {
         return item;
     }
@@ -24,6 +27,14 @@ public class OCRItem {
 
     public void setItemString(String itemString) {
         this.itemString = itemString;
+    }
+
+    public String getItemConfidence() {
+        return itemConfidence;
+    }
+
+    public void setItemConfidence(String itemConfidence) {
+        this.itemConfidence = itemConfidence;
     }
 
     public OCRItem() {

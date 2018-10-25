@@ -18,4 +18,6 @@ public interface OCRClient {
 
     OCRDriveLicenseReply driveLicense(Resource resource)throws IOException;
 
+    OCRBizReply biz(Resource resource) throws IOException;
+
 }
