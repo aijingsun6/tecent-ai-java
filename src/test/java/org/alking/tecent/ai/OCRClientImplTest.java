@@ -1,6 +1,7 @@
 package org.alking.tecent.ai;
 
 import org.alking.tecent.ai.domain.Resource;
+import org.alking.tecent.ai.impl.OKHttpClient;
 import org.alking.tecent.ai.ocr.OCRClient;
 import org.alking.tecent.ai.ocr.OCRClientImpl;
 import org.alking.tecent.ai.ocr.OCRIDCardReply;
@@ -12,7 +13,7 @@ import java.io.IOException;
 
 public class OCRClientImplTest extends BaseTest {
 
-    private OCRClient client = new OCRClientImpl(APP_ID,APP_KEY);
+    private OCRClient client = new OCRClientImpl(APP_ID,APP_KEY,new OKHttpClient());
 
     public OCRClientImplTest(){
     }

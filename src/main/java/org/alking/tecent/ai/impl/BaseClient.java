@@ -1,9 +1,10 @@
 package org.alking.tecent.ai.impl;
 
+import org.alking.tecent.ai.HttpClient;
 import org.alking.tecent.ai.domain.Resource;
-import org.alking.tecent.ai.util.HttpUtil;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -33,6 +34,8 @@ public class BaseClient {
 
     private final String appKey;
 
+    private final HttpClient httpClient;
+
     public String getAppId() {
         return appId;
     }
@@ -41,9 +44,20 @@ public class BaseClient {
         return appKey;
     }
 
-    public BaseClient(String appId, String appKey) {
+    public HttpClient getHttpClient() {
+        return httpClient;
+    }
+
+    public BaseClient(String appId, String appKey, HttpClient httpClient) {
+        if(StringUtils.isEmpty(appId) || StringUtils.isEmpty(appKey)){
+            throw new IllegalArgumentException("appId or appKey is empty");
+        }
+        if(httpClient == null){
+            throw new IllegalArgumentException("httpClient is null");
+        }
         this.appId = appId;
         this.appKey = appKey;
+        this.httpClient = httpClient;
     }
 
     protected String parseSourceData(final Resource resource) throws IOException {
@@ -64,7 +78,7 @@ public class BaseClient {
 
         if(Resource.RES_TYPE_HTTP == resource.getType()){
             String uri = resource.getUri();
-            byte[] bytes = HttpUtil.doGetBytes(uri);
+            byte[] bytes = this.httpClient.doGetBytes(uri);
             return Base64.getEncoder().encodeToString(bytes);
         }
 
