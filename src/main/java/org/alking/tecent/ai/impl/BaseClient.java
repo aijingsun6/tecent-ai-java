@@ -2,6 +2,7 @@ package org.alking.tecent.ai.impl;
 
 import org.alking.tecent.ai.HttpClient;
 import org.alking.tecent.ai.domain.Resource;
+import org.alking.tecent.ai.util.JsonUtil;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -58,6 +59,12 @@ public class BaseClient {
         this.appId = appId;
         this.appKey = appKey;
         this.httpClient = httpClient;
+    }
+
+    protected  <T> T normalReq(final String url, final TreeMap<String, String> map, Class<T> clazz) throws IOException {
+        this.calcSign(map);
+        final String json = getHttpClient().doPostFormString(url, map);
+        return JsonUtil.fromJson(json, clazz);
     }
 
     protected String parseSourceData(final Resource resource) throws IOException {

@@ -3,7 +3,6 @@ package org.alking.tecent.ai.ocr;
 import org.alking.tecent.ai.HttpClient;
 import org.alking.tecent.ai.domain.Resource;
 import org.alking.tecent.ai.impl.BaseClient;
-import org.alking.tecent.ai.util.JsonUtil;
 
 import java.io.IOException;
 import java.util.TreeMap;
@@ -36,12 +35,6 @@ public class OCRClientImpl extends BaseClient implements OCRClient {
 
     public OCRClientImpl(String appId, String appKey, HttpClient httpClient) {
         super(appId, appKey, httpClient);
-    }
-
-    private <T> T normalReq(final String url, final TreeMap<String, String> map, Class<T> clazz) throws IOException {
-        this.calcSign(map);
-        final String json = getHttpClient().doPostFormString(url, map);
-        return JsonUtil.fromJson(json, clazz);
     }
 
     @Override
