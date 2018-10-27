@@ -29,5 +29,6 @@ public class FaceClientImplTest extends BaseTest {
         Resource resource = new Resource(Resource.RES_TYPE_HTTP,url);
         MultiFaceReply reply = client.multiDetect(resource);
         Assert.assertEquals(new Integer(0),reply.getRet());
+        Assert.assertEquals(4, reply.getData().getFaces().size());
     }
 }
