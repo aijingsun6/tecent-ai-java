@@ -48,4 +48,12 @@ public class FaceClientImplTest extends BaseTest {
         FaceShapeReply reply = client.shape(resource,FaceClient.FACE_MODE_BIG);
         Assert.assertEquals(new Integer(0),reply.getRet());
     }
+
+    @Test
+    public void testCompare() throws IOException {
+        final Resource a = new Resource(Resource.RES_TYPE_HTTP,"https://raw.githubusercontent.com/aijingsun6/tecent-ai-java/master/doc/face_compare_a.jpg");
+        final Resource b = new Resource(Resource.RES_TYPE_HTTP,"https://raw.githubusercontent.com/aijingsun6/tecent-ai-java/master/doc/face_compare_b.jpg");
+        FaceCompareReply reply = client.compare(a,b);
+        Assert.assertEquals(new Integer(0),reply.getRet());
+    }
 }

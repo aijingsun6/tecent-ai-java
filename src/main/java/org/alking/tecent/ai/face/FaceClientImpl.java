@@ -17,11 +17,17 @@ public class FaceClientImpl extends BaseClient implements FaceClient {
 
     private static final String FACE_SHAPE_URL = "https://api.ai.qq.com/fcgi-bin/face/face_faceshape";
 
+    private static final String FACE_COMPARE_URL = "https://api.ai.qq.com/fcgi-bin/face/face_facecompare";
+
     private static final String SIGN_FIELD_MODE = "mode";
 
     private static final String SIGN_FIELD_SOURCE_IMAGE = "source_image";
 
     private static final String SIGN_FIELD_TARGET_IMAGE = "target_image";
+
+    private static final String SIGN_FIELD_IMAGE_A = "image_a";
+
+    private static final String SIGN_FIELD_IMAGE_B = "image_b";
 
     public FaceClientImpl(String appId, String appKey, HttpClient httpClient) {
         super(appId, appKey, httpClient);
@@ -65,5 +71,18 @@ public class FaceClientImpl extends BaseClient implements FaceClient {
         map.put(SIGN_FIELD_IMAGE, base64);
         map.put(SIGN_FIELD_MODE,String.valueOf(mode));
         return normalReq(FACE_SHAPE_URL,map,FaceShapeReply.class);
+    }
+
+    @Override
+    public FaceCompareReply compare(Resource a, Resource b) throws IOException {
+        if(a == null || b == null){
+            throw new IllegalArgumentException("resource can not be null.");
+        }
+        final String base64A = parseSourceData(a);
+        final String base64B = parseSourceData(b);
+        final TreeMap<String, String> map = new TreeMap<>();
+        map.put(SIGN_FIELD_IMAGE_A,base64A);
+        map.put(SIGN_FIELD_IMAGE_B,base64B);
+        return normalReq(FACE_COMPARE_URL,map,FaceCompareReply.class);
     }
 }

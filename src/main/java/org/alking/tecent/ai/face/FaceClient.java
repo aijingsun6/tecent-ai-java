@@ -17,4 +17,6 @@ public interface FaceClient {
     FaceCrossAgeReply crossAge(Resource resource, Resource target) throws IOException;
 
     FaceShapeReply shape(Resource resource, int mode) throws IOException;
+
+    FaceCompareReply compare(Resource a, Resource b) throws IOException;
 }
