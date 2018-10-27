@@ -1,11 +1,8 @@
 package org.alking.tecent.ai.face;
 
 import org.alking.tecent.ai.domain.Image;
-import org.alking.tecent.ai.face.identify.FaceIdentifyReply;
-import org.alking.tecent.ai.face.identify.FacePersonNewReply;
 
 import java.io.IOException;
-import java.util.List;
 
 public interface FaceClient {
 
@@ -23,9 +20,5 @@ public interface FaceClient {
 
     FaceCompareReply compare(Image a, Image b) throws IOException;
 
-    FaceIdentifyReply identify(Image res, String groupId, int topN) throws IOException;
-
     FaceVerifyReply verify(Image res, String personId) throws IOException;
-
-    FacePersonNewReply personNew(Image image, List<String> groups, String personId, String personName, String tag) throws IOException;
 }
