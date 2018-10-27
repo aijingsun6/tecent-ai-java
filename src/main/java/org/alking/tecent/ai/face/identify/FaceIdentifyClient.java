@@ -25,7 +25,7 @@ public interface FaceIdentifyClient {
 
     FacePersonIdsReply findPersonIdsByGroupId(String groupId) throws IOException;
 
-    FaceIdsReply findIdsByPersonId(String personId) throws IOException;
+    FaceIdsReply findFaceIdsByPersonId(String personId) throws IOException;
 
     FaceInfoReply faceInfo(String faceId) throws IOException;
 }

@@ -190,7 +190,7 @@ public class FaceIdentifyClientImpl extends BaseClient implements FaceIdentifyCl
     }
 
     @Override
-    public FaceIdsReply findIdsByPersonId(String personId) throws IOException {
+    public FaceIdsReply findFaceIdsByPersonId(String personId) throws IOException {
         if (StringUtils.isEmpty(personId)) {
             throw new IllegalArgumentException("invalid param personId");
         }
