@@ -67,7 +67,7 @@ public class BaseClient {
         return JsonUtil.fromJson(json, clazz);
     }
 
-    protected String parseSourceData(final Image image) throws IOException {
+    protected String parseBase64(final Image image) throws IOException {
 
         if(image == null){
             throw new IOException("image is null");

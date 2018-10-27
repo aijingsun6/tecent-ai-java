@@ -43,7 +43,7 @@ public class FaceClientImpl extends BaseClient implements FaceClient {
         if(mode != FACE_MODE_NORMAL && mode != FACE_MODE_BIG){
             throw new IllegalArgumentException("invalid param type ,should be 0 or 1");
         }
-        final String base64 = this.parseSourceData(image);
+        final String base64 = this.parseBase64(image);
         final TreeMap<String, String> map = new TreeMap<>();
         map.put(SIGN_FIELD_IMAGE, base64);
         map.put(SIGN_FIELD_MODE,String.valueOf(mode));
@@ -52,7 +52,7 @@ public class FaceClientImpl extends BaseClient implements FaceClient {
 
     @Override
     public FaceMultiReply multiDetect(Image image) throws IOException {
-        final String base64 = this.parseSourceData(image);
+        final String base64 = this.parseBase64(image);
         final TreeMap<String, String> map = new TreeMap<>();
         map.put(SIGN_FIELD_IMAGE, base64);
         return normalReq(MULTI_FACE_DETECT_URL,map,FaceMultiReply.class);
@@ -61,8 +61,8 @@ public class FaceClientImpl extends BaseClient implements FaceClient {
     @Override
     public FaceCrossAgeReply crossAge(Image image, Image target) throws IOException {
         final TreeMap<String, String> map = new TreeMap<>();
-        map.put(SIGN_FIELD_SOURCE_IMAGE, this.parseSourceData(image));
-        map.put(SIGN_FIELD_TARGET_IMAGE,this.parseSourceData(target));
+        map.put(SIGN_FIELD_SOURCE_IMAGE, this.parseBase64(image));
+        map.put(SIGN_FIELD_TARGET_IMAGE,this.parseBase64(target));
         return normalReq(CROSS_AGE_DETECT_URL,map,FaceCrossAgeReply.class);
     }
 
@@ -71,7 +71,7 @@ public class FaceClientImpl extends BaseClient implements FaceClient {
         if(mode != FACE_MODE_NORMAL && mode != FACE_MODE_BIG){
             throw new IllegalArgumentException("invalid param type ,should be 0 or 1");
         }
-        final String base64 = this.parseSourceData(image);
+        final String base64 = this.parseBase64(image);
         final TreeMap<String, String> map = new TreeMap<>();
         map.put(SIGN_FIELD_IMAGE, base64);
         map.put(SIGN_FIELD_MODE,String.valueOf(mode));
@@ -83,8 +83,8 @@ public class FaceClientImpl extends BaseClient implements FaceClient {
         if(a == null || b == null){
             throw new IllegalArgumentException("resource can not be null.");
         }
-        final String base64A = parseSourceData(a);
-        final String base64B = parseSourceData(b);
+        final String base64A = parseBase64(a);
+        final String base64B = parseBase64(b);
         final TreeMap<String, String> map = new TreeMap<>();
         map.put(SIGN_FIELD_IMAGE_A,base64A);
         map.put(SIGN_FIELD_IMAGE_B,base64B);
@@ -96,7 +96,7 @@ public class FaceClientImpl extends BaseClient implements FaceClient {
         if(StringUtils.isEmpty(personId)){
             throw new IllegalArgumentException("invalid param personId");
         }
-        final String base64 = parseSourceData(res);
+        final String base64 = parseBase64(res);
         final TreeMap<String, String> map = new TreeMap<>();
         map.put(SIGN_FIELD_IMAGE,base64);
         map.put(SIGN_FIELD_PERSON_ID,personId);

@@ -39,7 +39,7 @@ public class OCRClientImpl extends BaseClient implements OCRClient {
 
     @Override
     public OCRItemListReply general(final Image image) throws IOException {
-        final String base64 = this.parseSourceData(image);
+        final String base64 = this.parseBase64(image);
         final TreeMap<String, String> map = new TreeMap<>();
         map.put(SIGN_FIELD_IMAGE, base64);
         return normalReq(OCR_GENERIC_URL, map, OCRItemListReply.class);
@@ -50,7 +50,7 @@ public class OCRClientImpl extends BaseClient implements OCRClient {
         if (type != ID_CARD_TYPE_FRONT && type != ID_CARD_TYPE_BACK) {
             throw new IllegalArgumentException("type invalid");
         }
-        String base64 = this.parseSourceData(image);
+        String base64 = this.parseBase64(image);
         final TreeMap<String, String> map = new TreeMap<>();
         map.put(SIGN_FIELD_IMAGE, base64);
         map.put(SIGN_FIELD_CARD_TYPE, String.valueOf(type));
@@ -59,7 +59,7 @@ public class OCRClientImpl extends BaseClient implements OCRClient {
 
     @Override
     public OCRItemListReply vehicleLicense(Image image) throws IOException {
-        String base64 = this.parseSourceData(image);
+        String base64 = this.parseBase64(image);
         final TreeMap<String, String> map = new TreeMap<>();
         map.put(SIGN_FIELD_IMAGE, base64);
         map.put(SIGN_FIELD_TYPE, String.valueOf(TYPE_VEHICLE_LICENSE));
@@ -68,7 +68,7 @@ public class OCRClientImpl extends BaseClient implements OCRClient {
 
     @Override
     public OCRItemListReply driveLicense(Image image) throws IOException {
-        String base64 = this.parseSourceData(image);
+        String base64 = this.parseBase64(image);
         final TreeMap<String, String> map = new TreeMap<>();
         map.put(SIGN_FIELD_IMAGE, base64);
         map.put(SIGN_FIELD_TYPE, String.valueOf(TYPE_DRIVE_LICENSE));
@@ -77,7 +77,7 @@ public class OCRClientImpl extends BaseClient implements OCRClient {
 
     @Override
     public OCRItemListReply biz(Image image) throws IOException {
-        String base64 = this.parseSourceData(image);
+        String base64 = this.parseBase64(image);
         final TreeMap<String, String> map = new TreeMap<>();
         map.put(SIGN_FIELD_IMAGE, base64);
         return normalReq(OCR_BIZ_URL, map, OCRItemListReply.class);
@@ -85,7 +85,7 @@ public class OCRClientImpl extends BaseClient implements OCRClient {
 
     @Override
     public OCRItemListReply bankCard(Image image) throws IOException {
-        String base64 = this.parseSourceData(image);
+        String base64 = this.parseBase64(image);
         final TreeMap<String, String> map = new TreeMap<>();
         map.put(SIGN_FIELD_IMAGE, base64);
         return normalReq(OCR_BANK_CARD_URL, map, OCRItemListReply.class);
@@ -97,7 +97,7 @@ public class OCRClientImpl extends BaseClient implements OCRClient {
         if (Image.RES_TYPE_HTTP == image.getType()) {
             map.put(SIGN_FIELD_IMAGE_URL, image.getUri());
         } else {
-            String base64 = this.parseSourceData(image);
+            String base64 = this.parseBase64(image);
             map.put(SIGN_FIELD_IMAGE, base64);
         }
         return normalReq(OCR_HAND_WRITE_URL, map, OCRItemListReply.class);
@@ -111,11 +111,11 @@ public class OCRClientImpl extends BaseClient implements OCRClient {
             if (Image.RES_TYPE_HTTP == image.getType()) {
                 map.put(SIGN_FIELD_IMAGE_URL, image.getUri());
             } else {
-                String base64 = this.parseSourceData(image);
+                String base64 = this.parseBase64(image);
                 map.put(SIGN_FIELD_IMAGE, base64);
             }
         } else {
-            String base64 = this.parseSourceData(image);
+            String base64 = this.parseBase64(image);
             map.put(SIGN_FIELD_IMAGE, base64);
         }
 
@@ -125,7 +125,7 @@ public class OCRClientImpl extends BaseClient implements OCRClient {
 
     @Override
     public OCRItemListReply businessCard(Image image) throws IOException {
-        String base64 = this.parseSourceData(image);
+        String base64 = this.parseBase64(image);
         final TreeMap<String, String> map = new TreeMap<>();
         map.put(SIGN_FIELD_IMAGE, base64);
         return normalReq(OCR_BC_URL, map, OCRItemListReply.class);

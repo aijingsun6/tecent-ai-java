@@ -5,7 +5,7 @@ import org.alking.tecent.ai.domain.BaseReply;
 
 import java.util.List;
 
-public class FacePersonNewReply extends BaseReply<FacePersonNewReply.Data> {
+public class FaceNewPersonReply extends BaseReply<FaceNewPersonReply.Data> {
 
     public static class Data {
 
@@ -68,6 +68,6 @@ public class FacePersonNewReply extends BaseReply<FacePersonNewReply.Data> {
         }
     }
 
-    public FacePersonNewReply() {
+    public FaceNewPersonReply() {
     }
 }

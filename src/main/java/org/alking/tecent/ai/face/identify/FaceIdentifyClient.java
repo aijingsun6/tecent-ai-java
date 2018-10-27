@@ -7,9 +7,25 @@ import java.util.List;
 
 public interface FaceIdentifyClient {
 
-    FaceIdentifyReply identify(Image res, String groupId, int topN) throws IOException;
+    FaceIdentifyReply identify(Image image, String groupId, int topN) throws IOException;
 
-    FaceInfoReply info(String faceId) throws IOException;
+    FaceNewPersonReply newPerson(Image image, List<String> groups, String personId, String personName, String tag) throws IOException;
 
-    FacePersonNewReply personNew(Image image, List<String> groups, String personId, String personName, String tag) throws IOException;
+    FaceDelPersonReply delPerson(String personId) throws IOException;
+
+    FaceAddReply addFace(String personId, List<Image> images, String tag) throws IOException;
+
+    FaceDelReply delFace(String personId, List<String> faceIds) throws IOException;
+
+    FacePersonInfoSetReply setPersonInfo(String personId, String personName, String tag) throws IOException;
+
+    FacePersonInfoReply getPersonInfo(String personId) throws IOException;
+
+    FaceGroupIdsReply groupIds() throws IOException;
+
+    FacePersonIdsReply findPersonIdsByGroupId(String groupId) throws IOException;
+
+    FaceIdsReply findIdsByPersonId(String personId) throws IOException;
+
+    FaceInfoReply faceInfo(String faceId) throws IOException;
 }
