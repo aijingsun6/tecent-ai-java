@@ -16,7 +16,7 @@ public class FaceClientImplTest extends BaseTest {
     public void testFaceDetect() throws IOException {
         String url = "https://raw.githubusercontent.com/aijingsun6/tecent-ai-java/master/doc/face_detect.jpg";
         Resource resource = new Resource(Resource.RES_TYPE_HTTP,url);
-        FaceDetectReply reply = client.detect(resource,FaceClient.FACE_DETECT_TYPE_BIG);
+        FaceDetectReply reply = client.detect(resource,FaceClient.FACE_MODE_BIG);
         Assert.assertEquals(new Integer(0),reply.getRet());
     }
 
@@ -39,5 +39,13 @@ public class FaceClientImplTest extends BaseTest {
         FaceCrossAgeReply reply = client.crossAge(sourceRes,targetRes);
         Assert.assertEquals(new Integer(0),reply.getRet());
 
+    }
+
+    @Test
+    public void testShape() throws  IOException {
+        String url = "https://raw.githubusercontent.com/aijingsun6/tecent-ai-java/master/doc/face_detect.jpg";
+        Resource resource = new Resource(Resource.RES_TYPE_HTTP,url);
+        FaceShapeReply reply = client.shape(resource,FaceClient.FACE_MODE_BIG);
+        Assert.assertEquals(new Integer(0),reply.getRet());
     }
 }
