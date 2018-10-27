@@ -1,7 +1,7 @@
 package org.alking.tecent.ai.impl;
 
 import org.alking.tecent.ai.HttpClient;
-import org.alking.tecent.ai.domain.Resource;
+import org.alking.tecent.ai.domain.Image;
 import org.alking.tecent.ai.util.JsonUtil;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.FileUtils;
@@ -67,29 +67,29 @@ public class BaseClient {
         return JsonUtil.fromJson(json, clazz);
     }
 
-    protected String parseSourceData(final Resource resource) throws IOException {
+    protected String parseSourceData(final Image image) throws IOException {
 
-        if(resource == null){
-            throw new IOException("resource is null");
+        if(image == null){
+            throw new IOException("image is null");
         }
 
-        if(Resource.RES_TYPE_BASE64 == resource.getType()){
-            return resource.getUri();
+        if(Image.RES_TYPE_BASE64 == image.getType()){
+            return image.getUri();
         }
 
-        if(Resource.RES_TYPE_LOCAL == resource.getType()){
-            String path = resource.getUri();
+        if(Image.RES_TYPE_LOCAL == image.getType()){
+            String path = image.getUri();
             byte[] bytes = FileUtils.readFileToByteArray(new File(path));
             return Base64.getEncoder().encodeToString(bytes);
         }
 
-        if(Resource.RES_TYPE_HTTP == resource.getType()){
-            String uri = resource.getUri();
+        if(Image.RES_TYPE_HTTP == image.getType()){
+            String uri = image.getUri();
             byte[] bytes = this.httpClient.doGetBytes(uri);
             return Base64.getEncoder().encodeToString(bytes);
         }
 
-        throw new IOException("resource is invalid");
+        throw new IOException("image is invalid");
     }
 
     /**

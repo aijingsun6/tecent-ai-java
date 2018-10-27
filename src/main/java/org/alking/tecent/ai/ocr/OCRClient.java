@@ -1,6 +1,6 @@
 package org.alking.tecent.ai.ocr;
 
-import org.alking.tecent.ai.domain.Resource;
+import org.alking.tecent.ai.domain.Image;
 
 import java.io.IOException;
 
@@ -10,22 +10,22 @@ public interface OCRClient {
 
     int ID_CARD_TYPE_BACK = 1;
 
-    OCRItemListReply general(final Resource resource) throws IOException;
+    OCRItemListReply general(final Image image) throws IOException;
 
-    OCRIDCardReply idCard(final Resource resource, int type) throws IOException;
+    OCRIDCardReply idCard(final Image image, int type) throws IOException;
 
-    OCRItemListReply vehicleLicense(final Resource resource) throws IOException;
+    OCRItemListReply vehicleLicense(final Image image) throws IOException;
 
-    OCRItemListReply driveLicense(final Resource resource)throws IOException;
+    OCRItemListReply driveLicense(final Image image)throws IOException;
 
-    OCRItemListReply biz(final Resource resource) throws IOException;
+    OCRItemListReply biz(final Image image) throws IOException;
 
-    OCRItemListReply bankCard(final Resource resource) throws IOException;
+    OCRItemListReply bankCard(final Image image) throws IOException;
 
-    OCRItemListReply handWrite(final Resource resource) throws IOException;
+    OCRItemListReply handWrite(final Image image) throws IOException;
 
-    OCRItemListReply carPlate(final Resource resource) throws IOException;
+    OCRItemListReply carPlate(final Image image) throws IOException;
 
-    OCRItemListReply businessCard(final Resource resource) throws IOException;
+    OCRItemListReply businessCard(final Image image) throws IOException;
 
 }

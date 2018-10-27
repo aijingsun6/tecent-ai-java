@@ -1,4 +1,4 @@
-package org.alking.tecent.ai.face;
+package org.alking.tecent.ai.face.identify;
 
 import com.google.gson.annotations.SerializedName;
 import org.alking.tecent.ai.domain.BaseReply;

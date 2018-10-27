@@ -1,6 +1,6 @@
 package org.alking.tecent.ai.domain;
 
-public class Resource {
+public class Image {
 
     public static final int RES_TYPE_LOCAL = 1;
 
@@ -20,7 +20,7 @@ public class Resource {
         return uri;
     }
 
-    public Resource(int type, String uri) {
+    public Image(int type, String uri) {
         this.type = type;
         this.uri = uri;
     }

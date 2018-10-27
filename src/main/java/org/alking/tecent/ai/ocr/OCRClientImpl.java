@@ -1,7 +1,7 @@
 package org.alking.tecent.ai.ocr;
 
 import org.alking.tecent.ai.HttpClient;
-import org.alking.tecent.ai.domain.Resource;
+import org.alking.tecent.ai.domain.Image;
 import org.alking.tecent.ai.impl.BaseClient;
 
 import java.io.IOException;
@@ -38,19 +38,19 @@ public class OCRClientImpl extends BaseClient implements OCRClient {
     }
 
     @Override
-    public OCRItemListReply general(final Resource resource) throws IOException {
-        final String base64 = this.parseSourceData(resource);
+    public OCRItemListReply general(final Image image) throws IOException {
+        final String base64 = this.parseSourceData(image);
         final TreeMap<String, String> map = new TreeMap<>();
         map.put(SIGN_FIELD_IMAGE, base64);
         return normalReq(OCR_GENERIC_URL, map, OCRItemListReply.class);
     }
 
     @Override
-    public OCRIDCardReply idCard(Resource resource, int type) throws IOException {
+    public OCRIDCardReply idCard(Image image, int type) throws IOException {
         if (type != ID_CARD_TYPE_FRONT && type != ID_CARD_TYPE_BACK) {
             throw new IllegalArgumentException("type invalid");
         }
-        String base64 = this.parseSourceData(resource);
+        String base64 = this.parseSourceData(image);
         final TreeMap<String, String> map = new TreeMap<>();
         map.put(SIGN_FIELD_IMAGE, base64);
         map.put(SIGN_FIELD_CARD_TYPE, String.valueOf(type));
@@ -58,8 +58,8 @@ public class OCRClientImpl extends BaseClient implements OCRClient {
     }
 
     @Override
-    public OCRItemListReply vehicleLicense(Resource resource) throws IOException {
-        String base64 = this.parseSourceData(resource);
+    public OCRItemListReply vehicleLicense(Image image) throws IOException {
+        String base64 = this.parseSourceData(image);
         final TreeMap<String, String> map = new TreeMap<>();
         map.put(SIGN_FIELD_IMAGE, base64);
         map.put(SIGN_FIELD_TYPE, String.valueOf(TYPE_VEHICLE_LICENSE));
@@ -67,8 +67,8 @@ public class OCRClientImpl extends BaseClient implements OCRClient {
     }
 
     @Override
-    public OCRItemListReply driveLicense(Resource resource) throws IOException {
-        String base64 = this.parseSourceData(resource);
+    public OCRItemListReply driveLicense(Image image) throws IOException {
+        String base64 = this.parseSourceData(image);
         final TreeMap<String, String> map = new TreeMap<>();
         map.put(SIGN_FIELD_IMAGE, base64);
         map.put(SIGN_FIELD_TYPE, String.valueOf(TYPE_DRIVE_LICENSE));
@@ -76,46 +76,46 @@ public class OCRClientImpl extends BaseClient implements OCRClient {
     }
 
     @Override
-    public OCRItemListReply biz(Resource resource) throws IOException {
-        String base64 = this.parseSourceData(resource);
+    public OCRItemListReply biz(Image image) throws IOException {
+        String base64 = this.parseSourceData(image);
         final TreeMap<String, String> map = new TreeMap<>();
         map.put(SIGN_FIELD_IMAGE, base64);
         return normalReq(OCR_BIZ_URL, map, OCRItemListReply.class);
     }
 
     @Override
-    public OCRItemListReply bankCard(Resource resource) throws IOException {
-        String base64 = this.parseSourceData(resource);
+    public OCRItemListReply bankCard(Image image) throws IOException {
+        String base64 = this.parseSourceData(image);
         final TreeMap<String, String> map = new TreeMap<>();
         map.put(SIGN_FIELD_IMAGE, base64);
         return normalReq(OCR_BANK_CARD_URL, map, OCRItemListReply.class);
     }
 
     @Override
-    public OCRItemListReply handWrite(Resource resource) throws IOException {
+    public OCRItemListReply handWrite(Image image) throws IOException {
         final TreeMap<String, String> map = new TreeMap<>();
-        if (Resource.RES_TYPE_HTTP == resource.getType()) {
-            map.put(SIGN_FIELD_IMAGE_URL, resource.getUri());
+        if (Image.RES_TYPE_HTTP == image.getType()) {
+            map.put(SIGN_FIELD_IMAGE_URL, image.getUri());
         } else {
-            String base64 = this.parseSourceData(resource);
+            String base64 = this.parseSourceData(image);
             map.put(SIGN_FIELD_IMAGE, base64);
         }
         return normalReq(OCR_HAND_WRITE_URL, map, OCRItemListReply.class);
     }
 
     @Override
-    public OCRItemListReply carPlate(Resource resource) throws IOException {
+    public OCRItemListReply carPlate(Image image) throws IOException {
         final TreeMap<String, String> map = new TreeMap<>();
         boolean useImageUrl = false;
         if (useImageUrl) {
-            if (Resource.RES_TYPE_HTTP == resource.getType()) {
-                map.put(SIGN_FIELD_IMAGE_URL, resource.getUri());
+            if (Image.RES_TYPE_HTTP == image.getType()) {
+                map.put(SIGN_FIELD_IMAGE_URL, image.getUri());
             } else {
-                String base64 = this.parseSourceData(resource);
+                String base64 = this.parseSourceData(image);
                 map.put(SIGN_FIELD_IMAGE, base64);
             }
         } else {
-            String base64 = this.parseSourceData(resource);
+            String base64 = this.parseSourceData(image);
             map.put(SIGN_FIELD_IMAGE, base64);
         }
 
@@ -124,8 +124,8 @@ public class OCRClientImpl extends BaseClient implements OCRClient {
     }
 
     @Override
-    public OCRItemListReply businessCard(Resource resource) throws IOException {
-        String base64 = this.parseSourceData(resource);
+    public OCRItemListReply businessCard(Image image) throws IOException {
+        String base64 = this.parseSourceData(image);
         final TreeMap<String, String> map = new TreeMap<>();
         map.put(SIGN_FIELD_IMAGE, base64);
         return normalReq(OCR_BC_URL, map, OCRItemListReply.class);

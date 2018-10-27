@@ -18,5 +18,34 @@ public class FaceDetectReply extends BaseReply<FaceDetectReply.Data> {
         @SerializedName("face_list")
         private List<Face> faces;
 
+        public Integer getImageWidth() {
+            return imageWidth;
+        }
+
+        public void setImageWidth(Integer imageWidth) {
+            this.imageWidth = imageWidth;
+        }
+
+        public Integer getImageHeight() {
+            return imageHeight;
+        }
+
+        public void setImageHeight(Integer imageHeight) {
+            this.imageHeight = imageHeight;
+        }
+
+        public List<Face> getFaces() {
+            return faces;
+        }
+
+        public void setFaces(List<Face> faces) {
+            this.faces = faces;
+        }
+
+        public Data() {
+        }
+    }
+
+    public FaceDetectReply() {
     }
 }
