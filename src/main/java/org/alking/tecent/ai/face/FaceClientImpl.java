@@ -11,6 +11,8 @@ public class FaceClientImpl extends BaseClient implements FaceClient {
 
     private static final String FACE_DETECT_URL = "https://api.ai.qq.com/fcgi-bin/face/face_detectface";
 
+    private static final String MULTI_FACE_DETECT_URL = "https://api.ai.qq.com/fcgi-bin/face/face_detectmultiface";
+
     private static final String SIGN_FIELD_MODE = "mode";
 
     public FaceClientImpl(String appId, String appKey, HttpClient httpClient) {
@@ -18,7 +20,7 @@ public class FaceClientImpl extends BaseClient implements FaceClient {
     }
 
     @Override
-    public FaceDetechReply detect(Resource resource, int type) throws IOException {
+    public FaceDetectReply detect(Resource resource, int type) throws IOException {
         if(type != FACE_DETECT_TYPE_NORMAL && type != FACE_DETECT_TYPE_BIG){
             throw new IllegalArgumentException("invalid param type ,should be 0 or 1");
         }
@@ -26,6 +28,14 @@ public class FaceClientImpl extends BaseClient implements FaceClient {
         final TreeMap<String, String> map = new TreeMap<>();
         map.put(SIGN_FIELD_IMAGE, base64);
         map.put(SIGN_FIELD_MODE,String.valueOf(type));
-        return normalReq(FACE_DETECT_URL,map,FaceDetechReply.class);
+        return normalReq(FACE_DETECT_URL,map,FaceDetectReply.class);
+    }
+
+    @Override
+    public MultiFaceReply multiDetect(Resource resource) throws IOException {
+        final String base64 = this.parseSourceData(resource);
+        final TreeMap<String, String> map = new TreeMap<>();
+        map.put(SIGN_FIELD_IMAGE, base64);
+        return normalReq(MULTI_FACE_DETECT_URL,map,MultiFaceReply.class);
     }
 }

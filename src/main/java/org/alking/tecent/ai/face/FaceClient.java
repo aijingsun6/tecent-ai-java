@@ -9,5 +9,7 @@ public interface FaceClient {
     int FACE_DETECT_TYPE_NORMAL = 0;
     int FACE_DETECT_TYPE_BIG = 1;
 
-    FaceDetechReply detect(Resource resource, int type) throws IOException;
+    FaceDetectReply detect(Resource resource, int type) throws IOException;
+
+    MultiFaceReply multiDetect(Resource resource) throws IOException;
 }

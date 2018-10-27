@@ -5,7 +5,7 @@ import org.alking.tecent.ai.domain.BaseReply;
 
 import java.util.List;
 
-public class FaceDetechReply extends BaseReply<FaceDetechReply.Data> {
+public class FaceDetectReply extends BaseReply<FaceDetectReply.Data> {
 
     public static class Data {
 
