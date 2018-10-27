@@ -62,7 +62,8 @@ public class BaseClient {
     }
 
     protected  <T> T normalReq(final String url, final TreeMap<String, String> map, Class<T> clazz) throws IOException {
-        this.calcSign(map);
+        String sign = this.calcSign(map);
+        map.put(SIGN_FIELD_SIGN,sign);
         final String json = getHttpClient().doPostFormString(url, map);
         return JsonUtil.fromJson(json, clazz);
     }
@@ -95,7 +96,7 @@ public class BaseClient {
     /**
      * add timestamp and nonce_str automatic
      */
-    protected String calcSign(TreeMap<String, String> map) throws UnsupportedEncodingException {
+    private String calcSign(TreeMap<String, String> map) throws UnsupportedEncodingException {
         StringBuilder sb = new StringBuilder();
         map.put(SIGN_FIELD_APP_ID,this.appId);
         String timestamp = String.valueOf(System.currentTimeMillis()/1000);
@@ -114,9 +115,6 @@ public class BaseClient {
             sb.append(String.format("%s=%s&", key, urlEncode));
         }
         sb.append(String.format("%s=%s", SIGN_FIELD_APP_KEY, this.appKey));
-
-        String sign = DigestUtils.md5Hex(sb.toString()).toUpperCase();
-        map.put(SIGN_FIELD_SIGN,sign);
-        return sign;
+        return DigestUtils.md5Hex(sb.toString()).toUpperCase();
     }
 }
