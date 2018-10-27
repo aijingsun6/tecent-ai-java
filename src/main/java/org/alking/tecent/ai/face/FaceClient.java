@@ -19,4 +19,6 @@ public interface FaceClient {
     FaceShapeReply shape(Resource resource, int mode) throws IOException;
 
     FaceCompareReply compare(Resource a, Resource b) throws IOException;
+
+    FaceIdentifyReply identify(Resource res, String groupId, int topN) throws IOException;
 }

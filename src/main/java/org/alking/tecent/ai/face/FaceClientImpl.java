@@ -3,6 +3,7 @@ package org.alking.tecent.ai.face;
 import org.alking.tecent.ai.HttpClient;
 import org.alking.tecent.ai.domain.Resource;
 import org.alking.tecent.ai.impl.BaseClient;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 import java.util.TreeMap;
@@ -19,6 +20,8 @@ public class FaceClientImpl extends BaseClient implements FaceClient {
 
     private static final String FACE_COMPARE_URL = "https://api.ai.qq.com/fcgi-bin/face/face_facecompare";
 
+    private static final String FACE_IDENTIFY_URL = "https://api.ai.qq.com/fcgi-bin/face/face_faceidentify";
+
     private static final String SIGN_FIELD_MODE = "mode";
 
     private static final String SIGN_FIELD_SOURCE_IMAGE = "source_image";
@@ -28,6 +31,14 @@ public class FaceClientImpl extends BaseClient implements FaceClient {
     private static final String SIGN_FIELD_IMAGE_A = "image_a";
 
     private static final String SIGN_FIELD_IMAGE_B = "image_b";
+
+    private static final String SIGN_FIELD_GROUP_ID = "group_id";
+
+    private static final String SIGN_FIELD_TOP_N = "topn";
+
+    public static final int TOP_N_MIN = 1;
+
+    public static final int TOP_N_MAX = 10;
 
     public FaceClientImpl(String appId, String appKey, HttpClient httpClient) {
         super(appId, appKey, httpClient);
@@ -84,5 +95,22 @@ public class FaceClientImpl extends BaseClient implements FaceClient {
         map.put(SIGN_FIELD_IMAGE_A,base64A);
         map.put(SIGN_FIELD_IMAGE_B,base64B);
         return normalReq(FACE_COMPARE_URL,map,FaceCompareReply.class);
+    }
+
+    @Override
+    public FaceIdentifyReply identify(Resource res, String groupId, int topN) throws IOException {
+        if(StringUtils.isEmpty(groupId)){
+            throw new IllegalArgumentException("invalid param groupId");
+        }
+
+        if(topN < TOP_N_MIN || topN > TOP_N_MAX){
+            throw new IllegalArgumentException("param topN out of range [1,10]");
+        }
+        final String base64 = parseSourceData(res);
+        final TreeMap<String, String> map = new TreeMap<>();
+        map.put(SIGN_FIELD_IMAGE,base64);
+        map.put(SIGN_FIELD_GROUP_ID,groupId);
+        map.put(SIGN_FIELD_TOP_N,String.valueOf(topN));
+        return normalReq(FACE_IDENTIFY_URL,map,FaceIdentifyReply.class);
     }
 }

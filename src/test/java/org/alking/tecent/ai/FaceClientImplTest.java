@@ -55,5 +55,16 @@ public class FaceClientImplTest extends BaseTest {
         final Resource b = new Resource(Resource.RES_TYPE_HTTP,"https://raw.githubusercontent.com/aijingsun6/tecent-ai-java/master/doc/face_compare_b.jpg");
         FaceCompareReply reply = client.compare(a,b);
         Assert.assertEquals(new Integer(0),reply.getRet());
+        Assert.assertEquals(4.0f,reply.getData().getSimilarity(),0.01f);
+    }
+
+    @Test
+    public void testIdentify() throws IOException {
+        String url = "https://raw.githubusercontent.com/aijingsun6/tecent-ai-java/master/doc/multiface.jpg";
+        Resource resource = new Resource(Resource.RES_TYPE_HTTP,url);
+        final String groupId = "group-00";
+        final int topN = 10;
+        FaceIdentifyReply reply = client.identify(resource,groupId,topN);
+        Assert.assertEquals(new Integer(0),reply.getRet());
     }
 }
