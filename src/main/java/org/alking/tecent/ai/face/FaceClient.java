@@ -11,5 +11,7 @@ public interface FaceClient {
 
     FaceDetectReply detect(Resource resource, int type) throws IOException;
 
-    MultiFaceReply multiDetect(Resource resource) throws IOException;
+    FaceMultiReply multiDetect(Resource resource) throws IOException;
+
+    FaceCrossAgeReply crossAge(Resource resource, Resource target) throws IOException;
 }

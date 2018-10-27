@@ -1,10 +1,7 @@
 package org.alking.tecent.ai;
 
 import org.alking.tecent.ai.domain.Resource;
-import org.alking.tecent.ai.face.FaceClient;
-import org.alking.tecent.ai.face.FaceClientImpl;
-import org.alking.tecent.ai.face.FaceDetectReply;
-import org.alking.tecent.ai.face.MultiFaceReply;
+import org.alking.tecent.ai.face.*;
 import org.alking.tecent.ai.impl.OKHttpClient;
 import org.junit.Assert;
 import org.junit.Test;
@@ -27,8 +24,20 @@ public class FaceClientImplTest extends BaseTest {
     public void testMultiFaceDetect() throws IOException {
         String url = "https://raw.githubusercontent.com/aijingsun6/tecent-ai-java/master/doc/multiface.jpg";
         Resource resource = new Resource(Resource.RES_TYPE_HTTP,url);
-        MultiFaceReply reply = client.multiDetect(resource);
+        FaceMultiReply reply = client.multiDetect(resource);
         Assert.assertEquals(new Integer(0),reply.getRet());
         Assert.assertEquals(4, reply.getData().getFaces().size());
+    }
+
+    @Test
+    public void testCrossAgeDetect() throws IOException {
+        final String sourceUrl = "https://raw.githubusercontent.com/aijingsun6/tecent-ai-java/master/doc/face_crossage_source.jpg";
+        final Resource sourceRes = new Resource(Resource.RES_TYPE_HTTP,sourceUrl);
+
+        final String targetUrl = "https://raw.githubusercontent.com/aijingsun6/tecent-ai-java/master/doc/face_crossage_target.jpg";
+        final Resource targetRes = new Resource(Resource.RES_TYPE_HTTP,targetUrl);
+        FaceCrossAgeReply reply = client.crossAge(sourceRes,targetRes);
+        Assert.assertEquals(new Integer(0),reply.getRet());
+
     }
 }
